@@ -9,11 +9,16 @@
 </head>
 <body style="background-color: #121212; color: #00ff00; font-family: monospace; padding: 20px;">
     <h1>MoonOS Live Terminal</h1>
+    
+    <!-- Container where python output will print on screen -->
+    <div id="terminal"></div>
 
-    <!-- Write your Python code directly inside this tag -->
     <script type="py">
-print("Welcome to MoonOS!")
-# Paste the contents of your moon.py file here
+from pyscript import display
+
+# Use display() with target to write text to the HTML page directly
+display("Welcome to MoonOS!", target="terminal")
+display("System initialized and ready.", target="terminal")
     </script>
 </body>
 </html>
