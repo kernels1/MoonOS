@@ -554,6 +554,8 @@ class MoonKernel:
                         ("clear", "Clear screen"), ("reboot", "Restart OS"), ("shutdown", "Exit OS"),
                         ("wifi scan", "scans nearby signals"),
                         ("wifi connect <SSID> <password>", "connects to the signal")
+                        ("web <url> [-i]", "launches a native browser window (incognito optional)"),
+                        ("run <app.py>", "launches a Python app in a new window")
                     ]
                     for c, d in cmds: h.add_row(c, d)
                     console.print(h)
