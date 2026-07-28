@@ -3,22 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoonOS Web Demo</title>
+    <title>MoonOS Terminal</title>
+    <!-- Load PyScript -->
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <style>
+        body {
+            background-color: #0c0c0c;
+            color: #cccccc;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 20px;
+            margin: 0;
+        }
+        #terminal {
+            width: 100%;
+            max-width: 900px;
+            min-height: 400px;
+            background-color: #000000;
+            border: 1px solid #333333;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.8);
+            box-sizing: border-box;
+        }
+        .header-box {
+            border: 1px solid #555;
+            display: inline-block;
+            padding: 2px 8px;
+            color: #00ff00;
+            margin-bottom: 12px;
+        }
+        .prompt-line {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .prompt-user {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        .prompt-path {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        .prompt-symbol {
+            color: #ffffff;
+            margin-right: 8px;
+        }
+        input.term-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 1em;
+            flex-grow: 1;
+        }
+        .output-line {
+            margin: 4px 0;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
-<body style="background-color: #121212; color: #00ff00; font-family: monospace; padding: 20px;">
-    <h1>MoonOS Live Terminal</h1>
+<body>
+
+<div id="terminal">
+    <div class="header-box">MoonOS v1.0</div>
+    <div id="history"></div>
     
-    <!-- Container where python output will print on screen -->
-    <div id="terminal"></div>
+    <div class="prompt-line">
+        <span class="prompt-user">admin@moon</span>:<span class="prompt-path">/MoonDrive/</span><span class="prompt-symbol">$</span>
+        <input type="text" id="commandInput" class="term-input" autofocus autocomplete="off" spellcheck="false">
+    </div>
+</div>
 
-    <script type="py">
-from pyscript import display
+<script type="py">
+from js import document
+from pyscript import Element
 
-# Use display() with target to write text to the HTML page directly
-display("Welcome to MoonOS!", target="terminal")
-display("System initialized and ready.", target="terminal")
-    </script>
+def process_command(cmd):
+    """
+    This function takes what the user typed in the browser
+    and runs it through your MoonOS Python logic!
+    """
+    cmd = cmd.strip()
+    if not cmd:
+        return ""
+    
+    # Simple example command responses (Replace or connect with your moon.py logic)
+    if cmd == "help":
+        return "Available commands: help, clear, version, echo, ls"
+    elif cmd == "version":
+        return "MoonOS Kernel v1.0.0 [Web Edition]"
+    elif cmd == "clear":
+        return "__CLEAR__"
+    elif cmd.startswith("echo "):
+        return cmd[5:]
+    elif cmd == "ls":
+        return "system/   bin/   config.json   moon.py"
+    else:
+        return f"MoonOS: command not found: {cmd}"
+
+def handle_key(event):
+    if event.key == "Enter":
+        inp = document.getElementById("commandInput")
+        cmd = inp.value
+        inp.value = ""
+        
+        # Process the input using Python
+        response = process_command(cmd)
+        
+        history = document.getElementById("history")
+        
+        if response == "__CLEAR__":
+            history.innerHTML = ""
+            return
+
+        # Add input history line
+        user_line = document.createElement("div")
+        user_line.className = "output-line"
+        user_line.innerHTML = f'<span class="prompt-user">admin@moon</span>:<span class="prompt-path">/MoonDrive/</span><span class="prompt-symbol">$</span> {cmd}'
+        history.appendChild(user_line)
+        
+        # Add Python output response line
+        if response:
+            resp_line = document.createElement("div")
+            resp_line.className = "output-line"
+            resp_line.innerText = response
+            history.appendChild(resp_line)
+
+# Attach event listener to input box
+document.getElementById("commandInput").addEventListener("keydown", handle_key)
+</script>
+
 </body>
 </html>
