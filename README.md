@@ -7,6 +7,7 @@
 > 1. **Windows Required:** MoonOS relies heavily on `msvcrt` for keyboard input, `PyQt5`, and `cmd` window management. Running on Linux or macOS without adaptation will cause terminal input errors.
 > 2. **External Module Files:** MoonOS requires `filesystem.py`, `web_engine.py`, and `wifi.py` in the root folder to access full filesystem and network capabilities.
 > 3. **First-Boot Auto-Update:** On first startup, MoonOS will auto-install missing packages (`rich`, `PyQt5`, `playwright`, `opencv-python`, etc.) via `pip` and restart the terminal window automatically. Do not manually interrupt this boot phase!
+> 4. **Under Development** Some experimental subroutines and feature scripts are currently incomplete or broken. Full functionality for these modules will be added in upcoming commits.
 
 ---
 
