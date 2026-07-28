@@ -1,5 +1,5 @@
 [README.md](https://github.com/user-attachments/files/30463388/README.md)
-# 🌙 MoonOS Core
+# 🌙 MoonOS
 
 > [!WARNING]
 > **SYSTEM COMPATIBILITY & DEPENDENCY NOTICE**
