@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoonOS Web Demo</title>
+    <!-- Load PyScript so Python can run in the browser -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+</head>
+<body style="background-color: #121212; color: #00ff00; font-family: monospace; padding: 20px;">
+    <h1>MoonOS Live Terminal</h1>
+    <p>Running moon.py directly in your browser...</p>
+
+    <!-- This executes your moon.py file -->
+    <script type="py" src="./moon.py" config='{"packages": []}'></script>
+</body>
+</html>
